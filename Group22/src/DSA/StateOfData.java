@@ -11,7 +11,7 @@ public class StateOfData extends DataGenerator {
 		
         int[] partiallySorted = generateRandomData(DATA_SIZE, 0.50); // 50% shuffled
         int[] nearlySorted = generateRandomData(DATA_SIZE, 0.05); // 5% shuffled
-        int[] random = generateRandomData(DATA_SIZE, 1); // 5% shuffled
+        int[] random = generateRandomData(DATA_SIZE, 1); // fully shuffled
         
         // Save the datasets to files
         writeToFile(partiallySorted, OUTPUT_DIRECTORY+"partiallySorted.txt");
