@@ -7,7 +7,7 @@ public class NumberOfRecords extends DataGenerator{
     public static void main(String[] args) {
         final String OUTPUT_DIRECTORY = "data/integers/numberOfRecords/";
 
-        // Generate datasets with varying numbers of 10-digit records
+        // Generate datasets with varying numbers of 9-digit records
         for (int i = 1; i <= 10; i++) {
             int recordCount = i * 1_000_000; // Generate 1M to 10M records
             String fileName = OUTPUT_DIRECTORY + "numbersofrecords_" + recordCount + ".txt";
