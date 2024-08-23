@@ -13,8 +13,8 @@ public class BucketSortArrayList {
         int max = Collections.max(list);
         int min = Collections.min(list);
         
-        int range=(max-min)/list.size()+1;
-        int bucketCount = (max - min)/range+ 1;
+        int range = (max - min) / list.size() + 1;
+        int bucketCount = (max - min) / range + 1;
         List<List<Integer>> buckets = new ArrayList<>(bucketCount);
 
         for (int i = 0; i < bucketCount; i++) {
@@ -22,14 +22,34 @@ public class BucketSortArrayList {
         }
 
         for (Integer number : list) {
-        	int bucketIndex=(number-min)/range;
+            int bucketIndex = (number - min) / range;
             buckets.get(bucketIndex).add(number);
         }
 
         list.clear();
         for (List<Integer> bucket : buckets) {
-        	Collections.sort(bucket);
+            countingSort(bucket); 
             list.addAll(bucket);
+        }
+    }
+
+    private static void countingSort(List<Integer> bucket) {
+        if (bucket.isEmpty()) return;
+
+        int max = Collections.max(bucket);
+        int min = Collections.min(bucket);
+        int range = max - min + 1;
+
+        int[] count = new int[range];
+        for (Integer num : bucket) {
+            count[num - min]++;
+        }
+
+        bucket.clear();
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                bucket.add(i + min);
+            }
         }
     }
 
@@ -64,11 +84,7 @@ public class BucketSortArrayList {
         for (List<String> bucket : buckets) {
             if (bucket.size() > 1 && indent < getMaxLength(names)) {
                 List<String> sortedBucket = createBuckets(bucket, indent + 1);
-                for (String str : sortedBucket) {
-                    if (str.length() > indent) {
-                        output.add(str);
-                    }
-                }
+                output.addAll(sortedBucket);
             } else {
                 output.addAll(bucket);
             }
@@ -126,11 +142,7 @@ public class BucketSortArrayList {
         for (List<String> bucket : buckets) {
             if (bucket.size() > 1 && indent < getMaxLength(names)) {
                 List<String> sortedBucket = createWorstCaseBuckets(bucket, indent + 1);
-                for (String str : sortedBucket) {
-                    if (str.length() > indent) {
-                        output.add(str);
-                    }
-                }
+                output.addAll(sortedBucket);
             } else {
                 output.addAll(bucket);
             }
@@ -138,14 +150,15 @@ public class BucketSortArrayList {
 
         return output;
     }
+    
     public static void bucketSortIntegersWorstCase(List<Integer> list) {
         if (list.isEmpty()) return;
 
         // Create a single bucket for all elements
         List<Integer> bucket = new ArrayList<>(list);
 
-        // Sort the single bucket
-        Collections.sort(bucket);
+        // Sort the single bucket using counting sort
+        countingSort(bucket);
 
         // Replace original list with sorted bucket
         list.clear();
