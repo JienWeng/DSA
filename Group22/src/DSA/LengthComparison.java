@@ -29,8 +29,8 @@ public class LengthComparison extends DataGenerator {
         Random random = new Random();
 
         for (int i = 0; i < shortNumbers.length; i++) {
-            shortNumbers[i] = random.nextInt(10); // Short (1 digit)
-            mediumNumbers[i] = 1000 + random.nextInt(9000); // Medium (4 digits)
+            shortNumbers[i] = 100 + random.nextInt(900); // Short (1 digit)
+            mediumNumbers[i] = 100000 + random.nextInt(900000); // Medium (4 digits)
             longNumbers[i] = generateNineDigitInt(random); // Long (9 digits)
         }
     }

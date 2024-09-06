@@ -13,7 +13,6 @@ public abstract class DataGenerator {
 	            }
 	            System.out.println(filePath +" saved to file.");
 	        } catch (IOException e) {
-	            e.printStackTrace();
 	        }
 	    }
 	   
@@ -24,7 +23,6 @@ public abstract class DataGenerator {
 	            }
 	            System.out.println(filePath +"saved to file.");
 	        } catch (IOException e) {
-	            e.printStackTrace();
 	        }
 	    }
 
